@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="nl-BE">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Product-tile</title>
+        <link rel="stylesheet" href="product-tile--mobile-first.css">
+    </head>
+    <body>
+        
+        <section class="product-tile">
+            <a class="afbeelding" href="#">
+                <img src="voorbeeld_product.jpeg" alt="voorbeeldfoto">
+            </a>
+            <div class="product-content">
+                <div class="product-detail">
+                    <h2 class="product__titel">Emmer 10L</h2>
+                    <p class="product__prijs"><strong>30</strong> € /stuk</p>
+                    <p class="product__voorraad">50 in stock</p>
+                </div>
+                <div class="product-knoppen product-knoppen--desktop">
+                    <input class="knop" type="submit" value="Add To Cart" name="btnWinkelmandje">
+                    <input class="knop" type="submit" value="Add To Wishlist" name="btnWishlist">
+                </div>
+            </div>
+            <div class="product-knoppen product-knoppen--mobile">
+                <input class="knop" type="submit" value="Add To Cart" name="btnWinkelmandje">
+                <input class="knop" type="submit" value="Add To Wishlist" name="btnWishlist">
+            </div>
+        </section>
+
+    </body>
+</html>

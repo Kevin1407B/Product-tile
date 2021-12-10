@@ -1,0 +1,256 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+img {
+    max-width: 100%;
+}
+
+body {
+    display: grid;
+    min-height: 100vh;
+    place-items: center;
+    line-height: 1.6;
+    font-family: sans-serif;
+    padding: 2em;
+}
+
+/* 
+ *  ---------------------------------------------------------
+ *  algemene mobile-layout -> zonder transforms
+ */
+
+.product-tile {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 
+    "a d"
+    "a d"
+    "k k";
+
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    border-radius: 0.5rem;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.afbeelding {
+    grid-area: a;
+    align-self: center;
+}
+
+.product-content {
+    grid-area: d;
+    align-self: center;
+}
+
+.product-detail {
+    padding: 0.5rem;
+}
+
+.product__titel {
+    font-size: 1.3rem;
+    text-transform: capitalize;
+    color: #ABD7a8;
+    margin-bottom: 1rem;
+}
+
+.product__prijs {
+    color: #ABD7a8;
+}
+
+.product__prijs strong {
+    font-size: 2.5rem;
+}
+
+.product__voorraad {
+    font-size: 1rem;
+}
+
+.product-knoppen {
+    grid-area: k;
+    display: flex;
+}
+
+.product-knoppen--desktop {
+    display: none;
+    height: 0;
+    visibility: hidden;
+}
+
+.knop {
+    cursor: pointer;
+    display: inline-block;
+    font-weight: bold;
+    color: white;
+    background-color: #abd7a8;
+    border: 2px solid #ABD7a8;
+
+    padding: 1em;
+    width: 50%;
+}
+
+.knop:nth-of-type(1) {
+    border-bottom-left-radius: 0.5rem;
+}
+
+.knop:nth-of-type(2) {
+    border-bottom-right-radius: 0.5rem;
+}
+
+.knop:hover,
+.knop:focus {
+    outline: none;
+    background: white;
+    color: #ABD7a8;
+}
+
+/* 
+ *  -----------------------------------------
+ *  responsive-design
+ */
+
+@media (min-width: 650px) {
+    
+    /* 
+     *  -----------------------------------------
+     *  product-tile (layout + transform)
+     */
+
+    .product-tile {
+        display: block;
+
+        position: relative;
+        padding: 8rem 0 0;
+        overflow: hidden;
+
+        transition: transform 250ms ease;
+    }
+    
+    .product-tile:hover,
+    .product-tile:focus-within {
+        cursor: pointer;
+        transform: scale(1.01);
+    }
+
+    /* 
+     *  -----------------------------------------
+     *  achtergrond (linear-gradient) plaatsen
+     *  tekstveld zichtbaar maken on hover
+     */
+
+    .product-content {
+        background: linear-gradient(
+            hsl(0 0% 0% / 0),
+            hsl(0 0% 0% / 0.3) 20%,
+            hsl(0 0% 0% / 1)
+        );
+        border-radius: 0 0 0.6rem 0.6rem;
+
+        transform: translateY(65%);
+        transition: transform 500ms ease;    
+    }
+
+    .product-tile:hover .product-content,
+    .product-tile:focus-within .product-content {
+        transform: translateY(0);
+        transition-delay: 500ms;
+    }    
+
+    /* 
+     *  -----------------------------------------
+     *  kleine aanpassing voor keyboard-navigatie
+     */
+    
+    .product-tile:focus-within .product-content {
+        transition-duration: 0ms;
+    }
+
+    /* 
+     *  -----------------------------------------
+     *  knoppen--mobile verbergen
+     *  knoppen--desktop zichtbaar maken
+     */
+
+    .product-knoppen--mobile {
+        display: none;
+        height: 0;
+        visibility: hidden;
+    }
+
+    .product-knoppen--desktop {
+        display: flex;
+        height: auto;
+        visibility: visible;
+    }
+
+    /* 
+     *  -----------------------------------------
+     *  afbeelding op achtergrond plaatsen
+     */
+    
+     .afbeelding {
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    /* 
+     *  -----------------------------------------
+     *  padding op product-detail plaatsen
+     */
+
+    .product-detail {
+        --padding: 1rem;
+        text-align: center;
+        padding: var(--padding) calc(var(--padding) * 4);
+    }
+
+    /* 
+     *  -----------------------------------------
+     *  dynamische lijn onder titel
+     *  tekst van product-tile centeren
+     */
+
+    .product__titel {
+        font-size: 1.75rem;
+        position: relative;
+        
+        width: max-content;
+        margin: 0 auto;
+    }
+
+    .product__titel::after {
+        content: "";
+        position: absolute;
+        left: calc((var(--padding) * 4) * -1);
+        bottom: 0;
+
+        height: 3px;
+        width: calc(100% + (var(--padding) * 4));
+
+        background: currentColor;
+    
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 400ms ease;
+    }
+    
+    .product-tile:hover .product__titel::after,
+    .product-tile:focus-within .product__titel::after {
+        transform: scaleX(1);
+    }
+
+    /* 
+     *  ---------------------------------------------------
+     */
+    
+    .product__titel,
+    .product__prijs,
+    .product__voorraad {
+        color: white;
+    }
+}
